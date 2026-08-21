@@ -1,0 +1,136 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system — Soluções Caseiras
+ * Fundo escuro, vermelho como destaque, verde para benefícios.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.14 0.008 40);
+  --foreground: oklch(0.97 0.004 80);
+  --surface: oklch(0.19 0.01 40);
+  --surface-2: oklch(0.24 0.012 40);
+  --card: oklch(0.19 0.01 40);
+  --card-foreground: oklch(0.97 0.004 80);
+  --popover: oklch(0.19 0.01 40);
+  --popover-foreground: oklch(0.97 0.004 80);
+  --primary: oklch(0.58 0.21 27);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.24 0.012 40);
+  --secondary-foreground: oklch(0.97 0.004 80);
+  --muted: oklch(0.24 0.012 40);
+  --muted-foreground: oklch(0.74 0.012 60);
+  --accent: oklch(0.82 0.16 88);
+  --accent-foreground: oklch(0.16 0.01 40);
+  --success: oklch(0.65 0.17 148);
+  --success-foreground: oklch(0.14 0.01 40);
+  --destructive: oklch(0.58 0.21 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.3 0.012 40);
+  --input: oklch(0.3 0.012 40);
+  --ring: oklch(0.58 0.21 27);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility section-y {
+  padding-block: 4.5rem;
+  @media (min-width: 768px) {
+    padding-block: 6.5rem;
+  }
+}
+
+@utility cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 0.75rem;
+  background-color: var(--success);
+  color: var(--success-foreground);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  padding: 1.05rem 2rem;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+
+  &:hover {
+    filter: brightness(1.07);
+    transform: translateY(-1px);
+  }
+
+  @media (min-width: 640px) {
+    width: auto;
+    font-size: 1.15rem;
+  }
+}
+
+@utility eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
