@@ -190,10 +190,14 @@
     width: max-content;
     gap: 1.25rem;
     padding: 0.25rem 0.625rem;
-    animation: testimonial-scroll 55s linear infinite;
+    animation: testimonial-scroll 95s linear infinite;
   }
 
-  .testimonial-track:hover {
+  .testimonial-track-reverse {
+    animation-direction: reverse;
+  }
+
+  .testimonial-mask:hover .testimonial-track {
     animation-play-state: paused;
   }
 

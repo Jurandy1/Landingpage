@@ -186,57 +186,194 @@ const paraQuem = [
   "quer receitas simples, mesmo sem cozinhar muito",
 ];
 
+const depoimentoFoto = (arquivo: string) => `/images/depoimentos/${arquivo}.png`;
+
 const depoimentos = [
   {
-    nome: "Ana Carolina",
-    foto: "/images/depoimentos/ana-carolina.png",
-    texto: "Antes eu gastava muito com delivery. As receitas são fáceis, baratas e muito gostosas.",
+    nome: "Juliano Vasconcelos",
+    foto: depoimentoFoto("juliano-vasconcelos"),
+    texto:
+      "Conteúdo incrível e muito bem organizado. Me ajudou a planejar melhor as refeições da semana, economizar no mercado e manter uma alimentação de qualidade mesmo com a rotina corrida. Recomendo demais!",
+  },
+  {
+    nome: "Camila Monteiro",
+    foto: depoimentoFoto("camila-monteiro"),
+    texto:
+      "Simplesmente incrível! As receitas são deliciosas, acessíveis e cabem na rotina. Parei de pedir delivery e agora preparo minhas refeições em casa com muito mais qualidade. Já indiquei para várias amigas!",
   },
   {
     nome: "Henrique Rabelo",
-    foto: "/images/depoimentos/henrique-rabelo.png",
+    foto: depoimentoFoto("henrique-rabelo"),
     texto:
-      "Coloquei a alimentação em dia sem gastar uma fortuna. O conteúdo é simples e realmente funciona.",
+      "Com esse e-book consegui colocar a alimentação em dia sem gastar uma fortuna. As receitas são simples, práticas e realmente funcionam. Já reduzi muito os pedidos de delivery e sobrou mais dinheiro no fim do mês.",
   },
   {
-    nome: "Mariana Schmidt",
-    foto: "/images/depoimentos/mariana-schmidt.png",
-    texto: "Consegui variar o cardápio da semana e parei de depender de comida pronta.",
+    nome: "Maria das Dores",
+    foto: depoimentoFoto("maria-das-dores"),
+    texto:
+      "Eu e meu marido amamos o e-book! As receitas são simples, baratas e muito saborosas. Voltamos a cozinhar em casa e já sentimos a diferença no bolso. Está sendo uma grande ajuda no nosso dia a dia.",
+  },
+  {
+    nome: "Gustavo Almeida",
+    foto: depoimentoFoto("gustavo-almeida"),
+    texto:
+      "O e-book me mostrou que é possível comer bem gastando pouco. As receitas são práticas, variadas e fáceis de fazer. Consegui melhorar minha alimentação e ainda sobra mais dinheiro no fim do mês.",
+  },
+  {
+    nome: "Maricleide da Silva",
+    foto: depoimentoFoto("maricleide-da-silva"),
+    texto:
+      "Adorei o e-book! As receitas são práticas, bem explicadas e com ingredientes que a gente encontra fácil. Já fiz várias aqui em casa e minha família elogia sempre. Me ajudou muito a variar o cardápio sem gastar muito.",
+  },
+  {
+    nome: "Rafael Cardoso",
+    foto: depoimentoFoto("rafael-cardoso"),
+    texto:
+      "Top demais! O e-book é completo e muito bem explicado. As receitas são fáceis, economizei bastante e consegui incluir opções saudáveis no meu dia a dia. Meu doguinho também está aproveitando algumas receitas.",
+  },
+  {
+    nome: "Fernanda Oliveira",
+    foto: depoimentoFoto("fernanda-oliveira"),
+    texto:
+      "O e-book me ajudou muito a manter uma alimentação equilibrada mesmo com a rotina corrida. As receitas são práticas, gostosas e cabem no meu dia a dia. Já sinto mais energia nos treinos e consegui melhorar meus resultados.",
+  },
+  {
+    nome: "Gabriel Nascimento",
+    foto: depoimentoFoto("gabriel-nascimento"),
+    texto:
+      "O e-book me surpreendeu! As receitas são simples, mas muito saborosas. Consegui reduzir meus gastos no mercado e ainda melhorei minha alimentação. Hoje me sinto com mais energia e disposto no dia a dia.",
+  },
+  {
+    nome: "Juliana Lira",
+    foto: depoimentoFoto("juliana-lira"),
+    texto:
+      "Esse e-book facilitou muito minha rotina. As receitas são deliciosas, simples e cabem no orçamento. Consigo alimentar minha família com comida de verdade e sem complicação. Super recomendo!",
+  },
+  {
+    nome: "Diego Martins",
+    foto: depoimentoFoto("diego-martins"),
+    texto:
+      "Conteúdo sensacional! As receitas são fáceis, bem explicadas e com ingredientes que realmente encontramos. Consegui economizar no mercado e agora me alimento muito melhor, mesmo com a rotina de trabalho intensa. Super recomendo!",
+  },
+  {
+    nome: "Camila Freitas",
+    foto: depoimentoFoto("camila-freitas"),
+    texto:
+      "Adorei o conteúdo! As receitas são práticas, acessíveis e cabem perfeitamente na minha rotina. Além de economizar, consigo comer melhor e variar o cardápio. Meu gato até agradece, porque agora sobra mais para ele também!",
   },
   {
     nome: "Renan Brandes",
-    foto: "/images/depoimentos/renan-brandes.png",
-    texto: "Consigo preparar refeições gostosas em pouco tempo e gastando bem menos.",
+    foto: depoimentoFoto("renan-brandes"),
+    texto:
+      "Me ajudou demais na rotina corrida. Consigo preparar refeições gostosas em pouco tempo e gastando bem menos. O conteúdo é direto ao ponto e fácil de seguir. Vale muito a pena!",
+  },
+  {
+    nome: "Iara dos Santos",
+    foto: depoimentoFoto("iara-dos-santos"),
+    texto:
+      "Achei maravilhoso! As receitas são fáceis de seguir, econômicas e muito saborosas. Mesmo morando fora, consigo adaptar os ingredientes e manter uma alimentação saudável. Já indiquei para minhas amigas. Vale muito a pena!",
+  },
+  {
+    nome: "Thiago Nunes",
+    foto: depoimentoFoto("thiago-nunes"),
+    texto:
+      "Conteúdo sensacional! As receitas são práticas, saborosas e com ingredientes que encontro facilmente. Me ajudou a criar hábitos melhores e a gastar bem menos. Recomendo para qualquer pessoa!",
+  },
+  {
+    nome: "Bruna Carvalho",
+    foto: depoimentoFoto("bruna-carvalho"),
+    texto:
+      "Simplesmente amei! As receitas são deliciosas, práticas e cabem perfeitamente na rotina. Consegui variar muito o cardápio e hoje como bem sem gastar muito. O e-book realmente faz a diferença!",
+  },
+  {
+    nome: "Rafael Tanaka",
+    foto: depoimentoFoto("rafael-tanaka"),
+    texto:
+      "Material excelente! Aprendi várias receitas que eu não conhecia e que são fáceis de fazer. Já economizei bastante e a qualidade das refeições melhorou muito. Vale cada página!",
   },
   {
     nome: "Beatriz Santos",
-    foto: "/images/depoimentos/beatriz-santos.png",
-    texto: "Ingredientes acessíveis e receitas que me ajudaram a economizar no mercado.",
+    foto: depoimentoFoto("beatriz-santos"),
+    texto:
+      "Adorei o e-book! As receitas são deliciosas, fáceis de fazer e com ingredientes acessíveis. Me ajudou a manter uma alimentação mais saudável e ainda economizei bastante no mercado.",
   },
   {
-    nome: "João Paulo",
-    foto: "/images/depoimentos/joao-paulo.png",
-    texto: "O material me ajudou a organizar a rotina e a comer melhor sem gastar muito.",
+    nome: "Felipe Martins",
+    foto: depoimentoFoto("felipe-martins"),
+    texto:
+      "Esse e-book foi uma grande bênção na minha vida. Traz receitas simples, acessíveis e que ajudam a cuidar da saúde e do bolso. Consegui organizar minha alimentação e hoje me sinto muito melhor. Gratidão por esse conteúdo!",
+  },
+  {
+    nome: "Ana Carolina",
+    foto: depoimentoFoto("ana-carolina"),
+    texto:
+      "Eu amei esse e-book! Antes eu gastava muito com delivery e hoje economizo bastante. As receitas são fáceis, baratas e muito gostosas!",
+  },
+  {
+    nome: "Eduardo Lima",
+    foto: depoimentoFoto("eduardo-lima"),
+    texto:
+      "Esse e-book me ajudou a ter uma alimentação mais saudável sem gastar muito. As receitas são fáceis, bem detalhadas e usam ingredientes que encontro na minha cidade. Já percebi diferença no meu dia a dia, mais disposição e menos gastos. Super indico!",
+  },
+  {
+    nome: "Letícia Ramos",
+    foto: depoimentoFoto("leticia-ramos"),
+    texto:
+      "Mais do que receitas, o e-book me trouxe um novo olhar sobre o cuidado com o corpo. As receitas são simples, acessíveis e muito saborosas. Me ajudou a criar hábitos melhores e hoje me sinto mais saudável e disposta.",
   },
   {
     nome: "Lucas Guimarães",
-    foto: "/images/depoimentos/lucas-guimaraes.png",
-    texto: "Além de economizar, aprendi receitas variadas que realmente cabem no bolso.",
+    foto: depoimentoFoto("lucas-guimaraes"),
+    texto:
+      "Top demais! Além de economizar, aprendi a cozinhar coisas que realmente gosto. As receitas são variadas e cabem no bolso. Minha alimentação melhorou muito e hoje consigo manter a rotina sem complicação.",
   },
   {
-    nome: "Fernanda Lima",
-    foto: "/images/depoimentos/fernanda-lima.png",
-    texto: "As receitas são deliciosas, simples e cabem no orçamento. Recomendo muito.",
+    nome: "Carla Mendes",
+    foto: depoimentoFoto("carla-mendes"),
+    texto:
+      "Conteúdo completo e muito bem explicado! As receitas são variadas, econômicas e realmente funcionam. Consegui montar meu cardápio da semana, reduzi muito o delivery e agora me organizo melhor. Recomendo de verdade!",
+  },
+  {
+    nome: "João Paulo",
+    foto: depoimentoFoto("joao-paulo"),
+    texto:
+      "O e-book me ajudou a organizar minha rotina e a comer melhor sem gastar muito. Já senti a diferença no meu bolso no fim do mês!",
+  },
+  {
+    nome: "Patrícia Müller",
+    foto: depoimentoFoto("patricia-muller"),
+    texto:
+      "Adorei o e-book! Mesmo morando fora, consigo adaptar as receitas com ingredientes que encontro aqui na Suíça. São receitas simples, variadas e muito bem explicadas. Me ajudou a manter uma alimentação saudável e economizar. Já indiquei para várias amigas!",
+  },
+  {
+    nome: "Bruno Tavares",
+    foto: depoimentoFoto("bruno-tavares"),
+    texto:
+      "Muito prático e direto ao ponto. As receitas são ótimas, fáceis de fazer e realmente funcionam. Consegui economizar bastante no mês e ainda variar o cardápio. Vale cada centavo!",
+  },
+  {
+    nome: "Mariana Schmidt",
+    foto: depoimentoFoto("mariana-schmidt"),
+    texto:
+      "Receitas práticas, ingredientes acessíveis e um conteúdo muito bem explicado. Consegui variar o cardápio da semana e parei de depender de comida pronta!",
   },
   {
     nome: "Lucas Ribeiro",
-    foto: "/images/depoimentos/lucas-ribeiro.png",
-    texto: "Aprendi a cozinhar de forma prática e hoje consigo manter uma rotina melhor.",
+    foto: depoimentoFoto("lucas-ribeiro"),
+    texto:
+      "Simplesmente sensacional! Além de economizar, eu aprendi a cozinhar de forma mais prática e saudável. Hoje consigo me alimentar bem mesmo com a rotina corrida.",
   },
   {
     nome: "Kely Felippo",
-    foto: "/images/depoimentos/kely-felippo.png",
-    texto: "Organizei minha alimentação, economizei e ganhei tempo no dia a dia.",
+    foto: depoimentoFoto("kely-felippo"),
+    texto:
+      "Esse e-book foi uma ótima surpresa! Me ajudou a organizar melhor minha alimentação, economizar e ter mais tempo no dia a dia. As receitas são práticas, saborosas e cabem na minha rotina. Super recomendo!",
+  },
+  {
+    nome: "Fernanda Lima",
+    foto: depoimentoFoto("fernanda-lima"),
+    texto:
+      "Esse e-book mudou minha relação com a comida e com o dinheiro. As receitas são deliciosas e cabem no orçamento. Super recomendo!",
   },
 ];
 
@@ -323,6 +460,30 @@ function Stars() {
   );
 }
 
+function DepoimentoCard({ depoimento }: { depoimento: (typeof depoimentos)[number] }) {
+  return (
+    <figure className="content-card w-[min(420px,82vw)] shrink-0">
+      <header className="flex items-center gap-4">
+        <img
+          src={depoimento.foto}
+          alt={`Foto de ${depoimento.nome}`}
+          className="h-14 w-14 shrink-0 rounded-full border border-border object-cover"
+          loading="lazy"
+          width={56}
+          height={56}
+        />
+        <div>
+          <p className="font-display text-lg font-bold">{depoimento.nome}</p>
+          <Stars />
+        </div>
+      </header>
+      <blockquote className="mt-5 text-lg leading-relaxed text-pretty">
+        “{depoimento.texto}”
+      </blockquote>
+    </figure>
+  );
+}
+
 function Cta({
   label = "QUERO ECONOMIZAR NAS MINHAS REFEIÇÕES",
   compact = false,
@@ -363,7 +524,14 @@ function SectionTitle({
 }
 
 function Index() {
-  const testimonialTrack = [...depoimentos, ...depoimentos];
+  const trilhaA = [
+    ...depoimentos.filter((_, index) => index % 2 === 0),
+    ...depoimentos.filter((_, index) => index % 2 === 0),
+  ];
+  const trilhaB = [
+    ...depoimentos.filter((_, index) => index % 2 === 1),
+    ...depoimentos.filter((_, index) => index % 2 === 1),
+  ];
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-background pb-20 md:pb-0">
@@ -631,37 +799,21 @@ function Index() {
         </div>
       </section>
 
-      <section className="border-b border-border py-16 md:py-24">
+      <section className="overflow-hidden border-b border-border py-16 md:py-24">
         <div className="page-container">
-          <SectionTitle centered description="Relatos de quem incluiu as receitas na rotina.">
+          <SectionTitle centered description="Passe o mouse para pausar e ler com calma.">
             Quem já colocou as receitas em prática
           </SectionTitle>
         </div>
         <div className="testimonial-mask mt-10">
           <div className="testimonial-track">
-            {testimonialTrack.map((depoimento, index) => (
-              <figure
-                key={`${depoimento.nome}-${index}`}
-                className="content-card w-[min(390px,84vw)] shrink-0"
-              >
-                <header className="flex items-center gap-4">
-                  <img
-                    src={depoimento.foto}
-                    alt={`Foto de ${depoimento.nome}`}
-                    className="h-14 w-14 shrink-0 rounded-full border border-border object-cover"
-                    loading="lazy"
-                    width={56}
-                    height={56}
-                  />
-                  <div>
-                    <p className="font-display text-lg font-bold">{depoimento.nome}</p>
-                    <Stars />
-                  </div>
-                </header>
-                <blockquote className="mt-5 text-lg leading-relaxed">
-                  “{depoimento.texto}”
-                </blockquote>
-              </figure>
+            {trilhaA.map((depoimento, index) => (
+              <DepoimentoCard key={`a-${depoimento.nome}-${index}`} depoimento={depoimento} />
+            ))}
+          </div>
+          <div className="testimonial-track testimonial-track-reverse mt-5">
+            {trilhaB.map((depoimento, index) => (
+              <DepoimentoCard key={`b-${depoimento.nome}-${index}`} depoimento={depoimento} />
             ))}
           </div>
         </div>
