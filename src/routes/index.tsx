@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,21 +51,25 @@ const pratos = [
     preco: "R$11,55",
     nome: "Hambúrguer de soja com batata rústica",
     detalhe: "50 min · 4 porções · R$10,75 em promoção",
+    foto: "/uploads/fotos_receitas/hamburguer-de-soja-com-batata-rustica.png",
   },
   {
     preco: "R$11,60",
     nome: "Prato feito de ovo",
     detalhe: "40 min · 4 porções · R$10,40 em promoção",
+    foto: "/uploads/fotos_receitas/prato-feito-de-ovo.png",
   },
   {
     preco: "R$13,60",
     nome: "Lasanha econômica",
     detalhe: "1h10 · 5 porções · R$12,70 em promoção",
+    foto: "/uploads/fotos_receitas/lasanha-economica.png",
   },
   {
     preco: "R$14,55",
     nome: "Almôndegas ao molho",
     detalhe: "55 min · 4 porções · R$12,75 em promoção",
+    foto: "/uploads/fotos_receitas/almondegas-ao-molho.png",
   },
 ];
 
@@ -460,9 +464,15 @@ function Stars() {
   );
 }
 
-function DepoimentoCard({ depoimento }: { depoimento: (typeof depoimentos)[number] }) {
+function DepoimentoCard({
+  depoimento,
+  className = "",
+}: {
+  depoimento: (typeof depoimentos)[number];
+  className?: string;
+}) {
   return (
-    <figure className="content-card w-[min(420px,82vw)] shrink-0">
+    <figure className={`content-card w-[min(420px,82vw)] shrink-0 ${className}`}>
       <header className="flex items-center gap-4">
         <img
           src={depoimento.foto}
@@ -524,6 +534,26 @@ function SectionTitle({
 }
 
 function Index() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [zoom, setZoom] = useState<(typeof paginas)[number] | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsMobile(media.matches);
+    onChange();
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!zoom) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setZoom(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [zoom]);
+
   const trilhaA = [
     ...depoimentos.filter((_, index) => index % 2 === 0),
     ...depoimentos.filter((_, index) => index % 2 === 0),
@@ -534,7 +564,7 @@ function Index() {
   ];
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-background pb-20 md:pb-0">
+    <main className="min-h-screen overflow-x-hidden bg-background pb-24">
       <section className="hero-section border-b border-border">
         <div className="page-container section-space">
           <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
@@ -592,13 +622,23 @@ function Index() {
           </SectionTitle>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {pratos.map((prato) => (
-              <article key={prato.nome} className="content-card">
-                <p className="font-display text-4xl font-extrabold text-success">{prato.preco}</p>
-                <p className="mt-1 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase">
-                  por porção
-                </p>
-                <h3 className="mt-5 text-xl font-bold text-balance">{prato.nome}</h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{prato.detalhe}</p>
+              <article key={prato.nome} className="content-card overflow-hidden !p-0">
+                <div className="h-[170px] overflow-hidden bg-surface-2">
+                  <img
+                    src={prato.foto}
+                    alt={prato.nome}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="font-display text-4xl font-extrabold text-success">{prato.preco}</p>
+                  <p className="mt-1 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase">
+                    por porção
+                  </p>
+                  <h3 className="mt-5 text-xl font-bold text-balance">{prato.nome}</h3>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">{prato.detalhe}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -684,23 +724,57 @@ function Index() {
           >
             Não é só uma capa bonita. Veja páginas reais do material
           </SectionTitle>
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
-            {paginas.map((pagina) => (
-              <figure key={pagina.src} className="group">
-                <div className="overflow-hidden rounded-xl border border-border bg-white shadow-xl">
-                  <img
-                    src={pagina.src}
-                    alt={pagina.alt}
-                    className="aspect-[2134/3334] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption className="mt-3 font-display text-sm font-semibold text-muted-foreground sm:text-base">
-                  {pagina.legenda}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+
+          {isMobile ? (
+            <div className="mt-6">
+              <p className="mb-3 font-display text-sm font-semibold text-accent">
+                Deslize para ver as páginas · toque para ampliar
+              </p>
+              <div className="snap-rail snap-rail-bleed">
+                {paginas.map((pagina) => (
+                  <figure key={pagina.src} className="snap-item w-[78vw] shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setZoom(pagina)}
+                      className="block w-full cursor-zoom-in overflow-hidden rounded-xl border border-border bg-white shadow-xl"
+                    >
+                      <img
+                        src={pagina.src}
+                        alt={pagina.alt}
+                        className="aspect-[2134/3334] w-full object-cover object-top"
+                        loading="lazy"
+                      />
+                    </button>
+                    <figcaption className="mt-3 font-display text-sm font-semibold text-muted-foreground">
+                      {pagina.legenda}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
+              {paginas.map((pagina) => (
+                <figure key={pagina.src} className="group">
+                  <button
+                    type="button"
+                    onClick={() => setZoom(pagina)}
+                    className="block w-full cursor-zoom-in overflow-hidden rounded-xl border border-border bg-white shadow-xl"
+                  >
+                    <img
+                      src={pagina.src}
+                      alt={pagina.alt}
+                      className="aspect-[2134/3334] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+                      loading="lazy"
+                    />
+                  </button>
+                  <figcaption className="mt-3 font-display text-sm font-semibold text-muted-foreground sm:text-base">
+                    {pagina.legenda}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -801,22 +875,42 @@ function Index() {
 
       <section className="overflow-hidden border-b border-border py-16 md:py-24">
         <div className="page-container">
-          <SectionTitle centered description="Passe o mouse para pausar e ler com calma.">
+          <SectionTitle
+            centered
+            description={
+              isMobile
+                ? "Deslize para ver mais depoimentos."
+                : "Passe o mouse para pausar e ler com calma."
+            }
+          >
             Quem já colocou as receitas em prática
           </SectionTitle>
         </div>
-        <div className="testimonial-mask mt-10">
-          <div className="testimonial-track">
-            {trilhaA.map((depoimento, index) => (
-              <DepoimentoCard key={`a-${depoimento.nome}-${index}`} depoimento={depoimento} />
+
+        {isMobile ? (
+          <div className="snap-rail mt-8 px-5">
+            {depoimentos.map((depoimento) => (
+              <DepoimentoCard
+                key={depoimento.nome}
+                depoimento={depoimento}
+                className="snap-item !w-[86vw]"
+              />
             ))}
           </div>
-          <div className="testimonial-track testimonial-track-reverse mt-5">
-            {trilhaB.map((depoimento, index) => (
-              <DepoimentoCard key={`b-${depoimento.nome}-${index}`} depoimento={depoimento} />
-            ))}
+        ) : (
+          <div className="testimonial-mask mt-10">
+            <div className="testimonial-track">
+              {trilhaA.map((depoimento, index) => (
+                <DepoimentoCard key={`a-${depoimento.nome}-${index}`} depoimento={depoimento} />
+              ))}
+            </div>
+            <div className="testimonial-track testimonial-track-reverse mt-5">
+              {trilhaB.map((depoimento, index) => (
+                <DepoimentoCard key={`b-${depoimento.nome}-${index}`} depoimento={depoimento} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       <section id="oferta" className="section-alt border-b border-border">
@@ -933,6 +1027,26 @@ function Index() {
           <Cta compact label="QUERO MEU ACESSO" />
         </div>
       </aside>
+
+      {zoom && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Página ampliada"
+          className="lightbox"
+          onClick={() => setZoom(null)}
+        >
+          <img src={zoom.src} alt={zoom.alt} className="lightbox-image" />
+          <button
+            type="button"
+            aria-label="Fechar"
+            className="lightbox-close"
+            onClick={() => setZoom(null)}
+          >
+            ×
+          </button>
+        </div>
+      )}
     </main>
   );
 }

@@ -205,6 +205,64 @@
     display: none;
   }
 
+  .snap-rail {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-block: 0.25rem 0.75rem;
+  }
+
+  .snap-rail::-webkit-scrollbar {
+    height: 0;
+  }
+
+  .snap-rail-bleed {
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+  }
+
+  .snap-item {
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0 0 0 / 0.92);
+    padding: 1rem;
+    cursor: zoom-out;
+  }
+
+  .lightbox-image {
+    max-width: 100%;
+    max-height: 92vh;
+    width: auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background: #fff;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    height: 2.75rem;
+    width: 2.75rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--foreground);
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+
   @media (min-width: 768px) {
     .page-container,
     .narrow-container {
@@ -213,6 +271,11 @@
 
     .section-space {
       padding-block: 6rem;
+    }
+
+    .snap-rail-bleed {
+      margin-inline: -2rem;
+      padding-inline: 2rem;
     }
   }
 }
