@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 
+const PRIMARY_CTA_SELECTOR = "[data-primary-cta]";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -497,9 +499,11 @@ function DepoimentoCard({
 function Cta({
   label = "QUERO ECONOMIZAR NAS MINHAS REFEIÇÕES",
   compact = false,
+  primary = false,
 }: {
   label?: string;
   compact?: boolean;
+  primary?: boolean;
 }) {
   return (
     <a
@@ -507,6 +511,7 @@ function Cta({
       target="_blank"
       rel="noopener noreferrer"
       className={`cta-btn ${compact ? "cta-btn-compact" : ""}`}
+      {...(primary ? { "data-primary-cta": true } : {})}
     >
       {label}
     </a>
@@ -535,6 +540,7 @@ function SectionTitle({
 
 function Index() {
   const [isMobile, setIsMobile] = useState(false);
+  const [showStickyCta, setShowStickyCta] = useState(false);
   const [zoom, setZoom] = useState<(typeof paginas)[number] | null>(null);
 
   useEffect(() => {
@@ -543,6 +549,26 @@ function Index() {
     onChange();
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    const nodes = document.querySelectorAll(PRIMARY_CTA_SELECTOR);
+    if (!nodes.length) return;
+
+    const visible = new Set<Element>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        }
+        setShowStickyCta(visible.size === 0);
+      },
+      { threshold: 0, rootMargin: "0px 0px -12% 0px" },
+    );
+
+    nodes.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -564,7 +590,9 @@ function Index() {
   ];
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-background pb-24">
+    <main
+      className={`min-h-screen overflow-x-hidden bg-background ${showStickyCta ? "pb-24" : ""}`}
+    >
       <section className="hero-section border-b border-border">
         <div className="page-container section-space">
           <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
@@ -590,7 +618,7 @@ function Index() {
                 ))}
               </ul>
               <div className="mt-9">
-                <Cta />
+                <Cta primary />
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
                   Pagamento único de R$39,90 · Sem mensalidade · Acesso imediato · Garantia de 7
                   dias
@@ -945,7 +973,7 @@ function Index() {
                 Sem mensalidade · Acesso imediato
               </p>
               <div className="mt-8">
-                <Cta />
+                <Cta primary />
               </div>
             </div>
           </div>
@@ -998,7 +1026,7 @@ function Index() {
             99 refeições com custo por porção + 2 bônus, por R$39,90 em pagamento único.
           </p>
           <div className="mt-8">
-            <Cta />
+            <Cta primary />
           </div>
         </div>
       </section>
@@ -1014,8 +1042,11 @@ function Index() {
       </footer>
 
       <aside
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 py-3 backdrop-blur"
+        className={`fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 py-3 backdrop-blur transition-transform duration-300 ease-out ${
+          showStickyCta ? "translate-y-0" : "pointer-events-none translate-y-full"
+        }`}
         aria-label="Oferta fixa"
+        aria-hidden={!showStickyCta}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <div className="min-w-0">
