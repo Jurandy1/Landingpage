@@ -32,6 +32,12 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 const CHECKOUT = "https://pay.cakto.com.br/8rz7kik";
 
 const images = {
@@ -512,6 +518,11 @@ function Cta({
       rel="noopener noreferrer"
       className={`cta-btn ${compact ? "cta-btn-compact" : ""}`}
       {...(primary ? { "data-primary-cta": true } : {})}
+      onClick={() => {
+        if (typeof window !== "undefined" && typeof window.fbq === "function") {
+          window.fbq("track", "InitiateCheckout");
+        }
+      }}
     >
       {label}
     </a>
